@@ -1,12 +1,36 @@
 <html>
-  <head><title>Title</title></head>
-  <body>
-    <h1>{{ the_heading }}</h1>
-    <ul>
-	    {% for item in items %}
-       <li>{{ item }}</li>
-       {% endfor %}
-    </ul>
-    <p>Your last choice was {{ session.letter }}
-  </body>
+    <head>
+        <title>Hangman</title>
+    </head>
+    <body>
+        <!-- <div><h1>Guess the word</h1></div> -->
+        <div>{% if state.message != None %}<font color="red">{{ state.message }}</font>{% endif %}</div>
+        <div>
+          <table>
+            <tr>
+            <td>
+              <img src="/static/img{{state.errors}}.png"><br>
+              <font size=16 face="Courier New">{% for letter in state.guessed %}<strong>{{letter}}</strong> {%endfor%}</font>
+            </td>
+            <td width=20> </td>
+            <td>
+              <table>
+                <tr>
+                {% for letter in letters %}
+                {% if letter in state.chosen %}
+                  <td width=50><font size=16 face="Courier New" color="white">{{ letter.upper() }}</font></td>
+                {% else %}
+                  <td width=50><a href="{{ url_for('next_turn', letter=letter) }}"><font size=16 face="Courier New" >{{ letter.upper() }}</font></a></td>
+                {% endif %}
+                {% if loop.index is divisibleby 4 %}</tr><tr>{% endif %}
+                {% endfor %}
+                </tr>
+              </table>
+          </td>
+          </tr>
+          </table></div>
+        <div></div>
+      <P>
+    <a href="{{ url_for('.index') }}">RESET</a>
+    </body>
 </html>

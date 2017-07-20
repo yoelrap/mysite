@@ -1,0 +1,9 @@
+
+computer
+house
+telephone
+carnival
+cars
+hangman
+vocabulary
+dictionary
