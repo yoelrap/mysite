@@ -1,0 +1,27 @@
+.typewriter {
+  font-family: "Courier New", monospace;
+  font-size: 36px;
+  font-weight: bold;
+}
+
+.message {
+   background-color: #CC2222;
+}
+
+.padding {
+   padding: 20px 20px 40px 40px;
+}
+
+.letters {
+  font-family: monospace;
+  font-weight: bold;
+}
+.message h1 {
+   color: #FFFFFF;
+   font-size: 40px;
+}
+
+h1 {
+  font-size: 100px;
+  color: #FF0000;
+}

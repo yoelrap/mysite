@@ -1,36 +1,41 @@
 <html>
     <head>
-        <title>Hangman</title>
+      <title>Hangman</title>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+      <link href="/static/game.css" rel="stylesheet">
     </head>
     <body>
-        <!-- <div><h1>Guess the word</h1></div> -->
-        <div>{% if state.message != None %}<font color="red">{{ state.message }}</font>{% endif %}</div>
-        <div>
-          <table>
-            <tr>
-            <td>
-              <img src="/static/img{{state.errors}}.png"><br>
-              <font size=16 face="Courier New">{% for letter in state.guessed %}<strong>{{letter}}</strong> {%endfor%}</font>
-            </td>
-            <td width=20> </td>
-            <td>
-              <table>
-                <tr>
-                {% for letter in letters %}
-                {% if letter in state.chosen %}
-                  <td width=50><font size=16 face="Courier New" color="white">{{ letter.upper() }}</font></td>
-                {% else %}
-                  <td width=50><a href="{{ url_for('next_turn', letter=letter) }}"><font size=16 face="Courier New" >{{ letter.upper() }}</font></a></td>
-                {% endif %}
-                {% if loop.index is divisibleby 4 %}</tr><tr>{% endif %}
-                {% endfor %}
-                </tr>
-              </table>
-          </td>
-          </tr>
-          </table></div>
-        <div></div>
-      <P>
-    <a href="{{ url_for('.index') }}">RESET</a>
-    </body>
+      <div class="container">
+          <div class="row">
+            {% if state.message != None %}
+            <div class="col-md-12">
+              <div class="message padding">
+                <h1>{{ state.message }}</h1>
+              </div>
+            </div>
+            {% endif %}
+          </div>
+
+          <div class="row"><div class="col-md-12 padding"></div></div>
+
+          <div class="row">
+            <div class="col-md-6 text-right">
+              <img src="/static/img{{state.errors}}.png">
+            </div>
+            <div class="col-md-6 text-left">
+              {% for letter in letters %}
+                 <a href="{{ url_for('next_turn', letter=letter) }}" class="btn btn-lg {% if letter in state.chosen %}btn-default disabled{% else %}btn-success{%endif%}"  role="button" >
+                 <div class="letters">{{ letter.upper() }}</div></a>&nbsp;&nbsp;
+               {% if loop.index is divisibleby 6 %}<BR><BR>{% endif %}
+               {% endfor %}&nbsp;<a href="{{ url_for('.index') }}" class="btn btn-danger btn-lg">RESET</a>
+            </div>
+          </div> <!-- end of row -->
+
+          <div class="row">
+            <div class="col-md-12 text-center">
+              <div class="typewriter">{% for letter in state.guessed %}{{letter}}&nbsp;{%endfor%}</div>
+            </div>
+          </div> <!-- end of row -->
+     </div> <!-- end of container -->
+   </body>
 </html>
